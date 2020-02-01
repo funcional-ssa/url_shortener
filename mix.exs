@@ -1,9 +1,9 @@
-defmodule Url.MixProject do
+defmodule UrlShortener.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :url,
+      app: :url_shortener,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
