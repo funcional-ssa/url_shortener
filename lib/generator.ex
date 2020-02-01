@@ -1,4 +1,4 @@
-defmodule Encoder do
+defmodule Generator do
   def generate_key() do
     UUID.uuid4()
     |> get_unique_key()

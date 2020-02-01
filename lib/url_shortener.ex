@@ -7,7 +7,7 @@ defmodule UrlShortener do
   end
 
   def insert(url) do
-    key = Encoder.generate_key()
+    key = Generator.generate_key()
 
     {key, url} |> DBConnector.insert_key()
 
