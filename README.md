@@ -26,4 +26,4 @@ To-Do List
   "url": url
  }
 ```
-* Por fim, temos um módulo chamado Ele se chama UrlShortener, que utiliza os módulos anteriores para receber e resgatar URLs no banco de dados.
+* Por fim, temos um módulo chamado UrlShortener, que utiliza os módulos anteriores para receber e resgatar URLs no banco de dados.
