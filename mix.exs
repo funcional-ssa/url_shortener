@@ -14,7 +14,11 @@ defmodule UrlShortener.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      applications: [:mongodb, :poolboy],
+      applications: [:logger, :plug_cowboy],
+      mod: {
+        UrlShortener.Application,
+        []
+      },
       extra_applications: [:logger]
     ]
   end
@@ -22,9 +26,11 @@ defmodule UrlShortener.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      { :uuid, "~> 1.1" },
-      { :mongodb, ">= 0.0.0"},
-      { :poolboy, ">= 0.0.0" }
+      {:uuid, "~> 1.1"},
+      {:redix, ">= 0.0.0"},
+      {:castore, ">= 0.0.0"},
+      {:plug_cowboy, ">= 0.0.0"},
+      {:poison, ">= 0.0.0"}
     ]
   end
 end

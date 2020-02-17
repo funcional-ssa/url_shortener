@@ -17,8 +17,8 @@ defmodule Generator do
 
   defp url_exists_on_db(hash) do
     case DBConnector.get_by_key(hash) do
-      nil -> {:ok, false}
-      _ -> {:ok, true}
+      {:error, reason} -> {:ok, false}
+      {:ok, result} -> {:ok, true}
     end
   end
 end

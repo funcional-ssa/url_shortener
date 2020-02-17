@@ -1,23 +1,18 @@
 defmodule DBConnector do
-  @collection "test"
   def get_by_key(key) do
-    find_one(%{key: key})
-  end
-
-  def get_by_url(url) do
-    find_one(%{url: url})
+    Redix.command(connection(), ["GET", key])
   end
 
   def insert_key({key, original_url}) do
-    Mongo.insert_one(connection(), @collection, %{key: key, url: original_url})
+    Redix.command(connection(), ["SET", key, original_url])
   end
 
   defp connection do
-    {:ok, conn} = Mongo.start_link(url: "mongodb://localhost:27017/url")
-    conn
-  end
-
-  defp find_one(filter) do
-    Mongo.find_one(connection(), @collection, filter)
+    case Redix.start_link(host: "localhost", port: 6379) do
+      {:ok, conn} ->
+        conn
+      {:error, reason} ->
+        IO.puts(reason)
+    end
   end
 end
