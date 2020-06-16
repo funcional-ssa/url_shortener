@@ -3,19 +3,13 @@ defmodule UrlShortener do
   def insert(url) do
     key = Generator.generate_key()
 
-    case DBConnector.insert_key({key, url}) do
-      {:ok, _} -> key
-
-      {:error, reason} -> IO.puts(reason)
-    end
+    DBConnector.insert_key({key, url})
   end
 
   def get_url(key) do
-    case DBConnector.get_by_key(key) do
-      {:ok, result} ->
-
-      {:error, reason} ->
-    end
+    result = DBConnector.get_by_key(key)
+    IO.inspect result
+    result
   end
-
 end
+

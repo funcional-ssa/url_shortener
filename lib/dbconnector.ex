@@ -1,11 +1,19 @@
 defmodule DBConnector do
   def get_by_key(key) do
-    Redix.command(connection(), ["GET", key])
+    case Redix.command(connection(), ["GET", key]) do
+      {:ok, result} -> {:ok, result}
+      {:error, reason} -> {:error, reason}
+    end
   end
 
   def insert_key({key, original_url}) do
-    Redix.command(connection(), ["SET", key, original_url])
+    case Redix.command(connection(), ["SET", key, original_url]) do
+      {:ok, _} -> {:ok, key}
+      {:error, reason} -> {:error, reason}
+    end
   end
+
+
 
   defp connection do
     case Redix.start_link(host: "localhost", port: 6379) do
